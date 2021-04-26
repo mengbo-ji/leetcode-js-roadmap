@@ -4,7 +4,7 @@
  * @return {boolean}
  */
 const isValid = function (s) {
-  if (s.length % 2 !== 0) {
+  if (!s || s.length % 2 !== 0) {
     return false
   }
   let stack = [];
