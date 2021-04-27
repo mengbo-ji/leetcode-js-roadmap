@@ -13,7 +13,7 @@ const removeOuterParentheses = function (s) {
       case '(':
         const newLength = stack.push(v);
         if (newLength > 1) {
-            res += '(';
+          res += '(';
         }
         break;
       case ')':
@@ -22,7 +22,7 @@ const removeOuterParentheses = function (s) {
           res += ')'
           stack.pop()
         } else {
-            stack = [];
+          stack = [];
         }
     }
   }
