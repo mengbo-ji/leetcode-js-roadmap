@@ -1,4 +1,4 @@
-var RecentCounter = function() {
+var RecentCounter = function () {
   this.stack = [];
 };
 
@@ -6,10 +6,10 @@ var RecentCounter = function() {
 * @param {number} t
 * @return {number}
 */
-RecentCounter.prototype.ping = function(t) {
+RecentCounter.prototype.ping = function (t) {
   this.stack.push(t)
-  while(this.stack[0] < t - 3000) {
-      this.stack.shift()
+  while (this.stack[0] < t - 3000) {
+    this.stack.shift()
   }
   return this.stack.length;
 };
