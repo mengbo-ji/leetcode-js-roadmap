@@ -2,7 +2,7 @@
  * @param {string} s
  * @return {string}
  */
-const s = 'aaaa/4/inde11x.html';
+const s = '/2222/aaaa/4/inde11x.html';
 const findNumber = function (s) {
   let res = '';
   const arr = s.match(/(\/\d+\/)\1*/g);
