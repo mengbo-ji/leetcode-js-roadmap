@@ -3,11 +3,11 @@
  * @param {number} n
  * @return {string[]}
  */
-const buildArray = function (target, n) {
+const buildArray = function(target, n) {
   const stack = [];
   if (target.length === n) {
     stack.length = n;
-    stack.fill('Push')
+    stack.fill('Push');
     return stack;
   }
   let index = 1;
@@ -18,7 +18,7 @@ const buildArray = function (target, n) {
       for (let j = 0; j < target[i] - index; j++) {
         stack.push('Push');
         stack.push('Pop');
-        i--
+        i--;
       }
     }
     index++;

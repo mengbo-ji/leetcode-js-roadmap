@@ -2,7 +2,7 @@
  * @param {string} s
  * @return {number}
  */
-const firstUniqChar = function (s) {
+const firstUniqChar = function(s) {
   // for (let i = 0; i < s.length; i++) {
   //     if (s.indexOf(s[i]) === s.lastIndexOf(s[i])) {
   //         return i
@@ -18,5 +18,5 @@ const firstUniqChar = function (s) {
     }
   }
 
-  return -1
+  return -1;
 };

@@ -3,7 +3,7 @@
  * @param {number} target
  * @return {number[]}
  */
-const twoSum = function (numbers, target) {
+const twoSum = function(numbers, target) {
   // for (let i = 0; i < numbers.length; i++) {
   //     const cur = numbers[i];
   //     for (let j = i + 1; j < numbers.length; j++) {
@@ -15,9 +15,9 @@ const twoSum = function (numbers, target) {
   const map = new Map();
   for (let i = 0; i < numbers.length; i++) {
     if (map.has(target - numbers[i])) {
-      return [map.get(target - numbers[i]), i + 1]
-    } else {
-      map.set(numbers[i], i + 1);
+      return [ map.get(target - numbers[i]), i + 1 ];
     }
+    map.set(numbers[i], i + 1);
+
   }
 };

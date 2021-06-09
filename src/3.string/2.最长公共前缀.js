@@ -2,7 +2,7 @@
  * @param {string[]} strs
  * @return {string}
  */
-const longestCommonPrefix = function (strs) {
+const longestCommonPrefix = function(strs) {
   let res = '';
   let maxPrefixLength = 200;
   strs.forEach(v => {
@@ -15,9 +15,9 @@ const longestCommonPrefix = function (strs) {
     const set = new Set();
     strs.forEach(v => {
       set.add(v[i] || '');
-    })
+    });
     if (set.size === 1) {
-      res += [...set][0]
+      res += [ ...set ][0];
     } else {
       return res;
     }

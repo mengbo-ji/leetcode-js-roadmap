@@ -2,7 +2,7 @@
  * @param {string[]} ops
  * @return {number}
  */
-const calPoints = function (ops) {
+const calPoints = function(ops) {
   const stack = [];
   for (let i = 0; i < ops.length; i++) {
     switch (ops[i]) {

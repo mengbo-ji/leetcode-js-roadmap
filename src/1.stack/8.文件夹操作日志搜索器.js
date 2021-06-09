@@ -2,22 +2,22 @@
  * @param {string[]} logs
  * @return {number}
  */
-const minOperations = function (logs) {
+const minOperations = function(logs) {
   let res = 0;
-  for (let v of logs) {
+  for (const v of logs) {
     switch (v) {
       case './':
         res += 0;
         break;
       case '../':
         if (res) {
-          res += -1
+          res += -1;
         } else {
-          res = 0
+          res = 0;
         }
-        break
+        break;
       default:
-        res += 1
+        res += 1;
         break;
     }
   }

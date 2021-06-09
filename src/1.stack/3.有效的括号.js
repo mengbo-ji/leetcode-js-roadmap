@@ -3,12 +3,12 @@
  * @param {string} s
  * @return {boolean}
  */
-const isValid = function (s) {
+const isValid = function(s) {
   if (!s || s.length % 2 !== 0) {
-    return false
+    return false;
   }
-  let stack = [];
-  for (let v of s) {
+  const stack = [];
+  for (const v of s) {
     switch (v) {
       case '(':
       case '[':
@@ -24,7 +24,9 @@ const isValid = function (s) {
       case '}':
         if (stack.pop() !== '{') return false;
         break;
+      default:
+        break;
     }
   }
-  return !stack.length
+  return !stack.length;
 };

@@ -3,7 +3,7 @@
  * @param {number} n
  * @return {string}
  */
-const reverseLeftWords = function (s, n) {
+const reverseLeftWords = function(s, n) {
   let str = s.substring(n);
   let index = 1;
   while (n) {

@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-const majorityElement = function (nums) {
+const majorityElement = function(nums) {
   const len = nums.length / 2;
   const map = new Map();
   for (let i = 0; i < nums.length; i++) {

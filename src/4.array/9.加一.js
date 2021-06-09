@@ -2,7 +2,7 @@
  * @param {number[]} digits
  * @return {number[]}
  */
-const plusOne = function (digits) {
+const plusOne = function(digits) {
   let carry = false;
   digits[digits.length - 1]++;
   for (let i = digits.length - 1; i >= 0; i--) {

@@ -32,20 +32,21 @@
 //     }
 //     return res;
 // };
-let nextGreaterElement = function (nums1, nums2) {
-  let map = new Map(), stack = [], ans = [];
+const nextGreaterElement = function(nums1, nums2) {
+  const map = new Map(),
+    stack = [],
+    ans = [];
   nums2.forEach(item => {
     while (stack.length && item > stack[stack.length - 1]) {
-      map.set(stack.pop(), item)
-    };
+      map.set(stack.pop(), item);
+    }
     stack.push(item);
   });
-  console.log('map', map)
-  console.log('stack', ans)
-  console.log('ans', ans)
+  console.log('map', map);
+  console.log('stack', ans);
+  console.log('ans', ans);
   stack.forEach(item => map.set(item, -1));
   nums1.forEach(item => ans.push(map.get(item)));
   return ans;
 };
-
 

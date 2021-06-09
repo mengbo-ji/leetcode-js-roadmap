@@ -33,9 +33,9 @@
 //     return stack.join('');
 // };
 
-const makeGood = function (s) {
+const makeGood = function(s) {
   const res = [];
-  for (let v of s) {
+  for (const v of s) {
     if (res.length &&
       res[res.length - 1] !== v &&
       res[res.length - 1].toUpperCase() === v.toUpperCase()) {
@@ -45,4 +45,4 @@ const makeGood = function (s) {
     }
   }
   return res.join('');
-}
+};

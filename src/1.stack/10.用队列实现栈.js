@@ -1,16 +1,16 @@
 /**
  * Initialize your data structure here.
  */
-var MyStack = function () {
+const MyStack = function() {
   this.stack = [];
 };
 
 /**
-* Push element x onto stack. 
+* Push element x onto stack.
 * @param {number} x
 * @return {void}
 */
-MyStack.prototype.push = function (x) {
+MyStack.prototype.push = function(x) {
   this.stack.push(x);
 };
 
@@ -18,7 +18,7 @@ MyStack.prototype.push = function (x) {
 * Removes the element on top of the stack and returns that element.
 * @return {number}
 */
-MyStack.prototype.pop = function () {
+MyStack.prototype.pop = function() {
   return this.stack.pop();
 };
 
@@ -26,7 +26,7 @@ MyStack.prototype.pop = function () {
 * Get the top element.
 * @return {number}
 */
-MyStack.prototype.top = function () {
+MyStack.prototype.top = function() {
   return this.stack[this.stack.length - 1];
 };
 
@@ -34,7 +34,7 @@ MyStack.prototype.top = function () {
 * Returns whether the stack is empty.
 * @return {boolean}
 */
-MyStack.prototype.empty = function () {
+MyStack.prototype.empty = function() {
   return this.stack.length === 0;
 };
 

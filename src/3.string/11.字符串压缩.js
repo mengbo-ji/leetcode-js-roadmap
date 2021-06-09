@@ -2,7 +2,7 @@
  * @param {string} S
  * @return {string}
  */
-const compressString = function (s) {
+const compressString = function(s) {
   let stack = [];
   let res = '';
   for (let i = 0; i < s.length; i++) {
@@ -26,7 +26,7 @@ const compressString = function (s) {
  * @param {string} S
  * @return {string}
  */
-const compressString = function (s) {
+const compressString1 = function(s) {
   let res = '';
   let count = 1;
   let index = 0;
@@ -35,9 +35,9 @@ const compressString = function (s) {
       res += s[index] + count;
       count = 1;
     } else {
-      count++
+      count++;
     }
-    index++
+    index++;
   }
   return s.length > res.length ? res : s;
 };
