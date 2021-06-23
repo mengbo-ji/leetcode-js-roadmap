@@ -27,7 +27,8 @@ const getKthFromEnd = function(head, k) {
   // })
   // return newList.next;
   // 快慢指针法
-  let fast = slow = head;
+  let fast = head;
+  let slow = head;
   let n = 0;
   while (fast) {
     if (n >= k) {
