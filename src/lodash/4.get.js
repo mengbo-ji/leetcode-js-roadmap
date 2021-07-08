@@ -29,9 +29,19 @@ const obj = {
   },
 };
 
-console.log(get(obj, 'arr[0].a', 0)); // output: 1
-console.log(get({ a: null }, 'a.b.c', 2)); // output: 2
-console.log(get({ a: undefined }, 'a', 1)); // output: 1
+// console.log(get(obj, 'arr[0].a', 0)); // output: 1
+// console.log(get({ a: null }, 'a.b.c', 2)); // output: 2
+// console.log(get({ a: undefined }, 'a', 1)); // output: 1
+// console.log(get({ a: null }, 'a', 3)); // output: null
+// console.log(get({ a: [{ b: 1 }] }, 'a[0].b', 3)); // output: 1
+// console.log(get([{ a: { b: 111 } }], '[0].a.b', 3)); // output: 111
+
+// 不考虑 [] 的情况
+const _get = (object, keys, val) => {
+  return keys.split(/\./).reduce((prev, next) => ((prev || {})[next]), object) || val;
+};
+
+console.log(get({ a: null }, 'a.b.c', 3)); // output: 3
+console.log(get({ a: undefined }, 'a', 3)); // output: 3
 console.log(get({ a: null }, 'a', 3)); // output: null
-console.log(get({ a: [{ b: 1 }] }, 'a[0].b', 3)); // output: 1
-console.log(get([{ a: { b: 111 } }], '[0].a.b', 3)); // output: 111
+console.log(get({ a: { b: 1 } }, 'a.b', 3)); // output: 1
