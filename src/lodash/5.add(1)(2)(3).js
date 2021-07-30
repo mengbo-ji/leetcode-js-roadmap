@@ -30,3 +30,32 @@ const fnCurry = currying(compute);
 // 测试下
 console.log(fnCurry(1)(2)(3)(4)(5)());
 console.log(fnCurry(1, 2, 3)(4)(5)());
+
+
+// 计算函数
+const complute = (...args) => {
+  return args.reduce((prev, next) => prev + next, 0);
+};
+
+
+const currying1 = fn => {
+  let args = [];
+  return function temp(...newArgs) {
+    if (newArgs.length) {
+      args = [
+        ...args,
+        ...newArgs,
+      ];
+      return temp;
+    }
+    const res = fn.apply(this, args);
+    args = [];
+    return res;
+  };
+};
+
+const fnCurry1 = currying1(complute);
+
+// 测试下
+console.log(fnCurry1(1)(2)(3)(4)(5)());
+console.log(fnCurry1(1, 2, 3)(4)(5)());
