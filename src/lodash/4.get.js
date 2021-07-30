@@ -41,7 +41,28 @@ const _get = (object, keys, val) => {
   return keys.split(/\./).reduce((prev, next) => ((prev || {})[next]), object) || val;
 };
 
-console.log(get({ a: null }, 'a.b.c', 3)); // output: 3
-console.log(get({ a: undefined }, 'a', 3)); // output: 3
-console.log(get({ a: null }, 'a', 3)); // output: null
-console.log(get({ a: { b: 1 } }, 'a.b', 3)); // output: 1
+// console.log(get({ a: null }, 'a.b.c', 3)); // output: 3
+// console.log(get({ a: undefined }, 'a', 3)); // output: 3
+// console.log(get({ a: null }, 'a', 3)); // output: null
+// console.log(get({ a: { b: 1 } }, 'a.b', 3)); // output: 1
+
+function get1(source, path, defaultValue) {
+  if (typeof source !== 'object' || typeof path !== 'string') {
+    return;
+  }
+  const paths = path.replace(/\[(\d+)\]/g, '.$1').split('.').filter(Boolean);
+  let res = source;
+  for (const p of paths) {
+    res = Object(res)[p];
+    if (res === undefined) {
+      return defaultValue;
+    }
+  }
+  return res;
+}
+
+
+console.log(get1({ a: null }, 'a.b.c', 3)); // output: 3
+console.log(get1({ a: undefined }, 'a', 3)); // output: 3
+console.log(get1({ a: null }, 'a', 3)); // output: null
+console.log(get1({ a: { b: 1 } }, 'a.b', 3)); // output: 1
