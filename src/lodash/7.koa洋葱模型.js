@@ -27,7 +27,7 @@ middleware.push(async (ctx, next) => {
 
 const ctx = {};
 
-compose1(middleware)(ctx);
+compose2(middleware)(ctx);
 
 function compose(middleware) {
   return function(context) {
@@ -76,6 +76,25 @@ function compose1(middleware) {
         // 调用当前中间件，并把下一次中间件的调用 函数传给 next函数
         const ret = fn(context, dispatch.bind(null, i + 1));
         // 将本次调用的结果返还给上一个 中间件 也就是 await next()
+        return Promise.resolve(ret);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+  };
+}
+
+function compose2(middleware) {
+  return function(context) {
+    // 默认从第一个开始
+    dispatch(0);
+    function dispatch(i) {
+      const fn = middleware[i];
+      if (i === middleware.length) {
+        return Promise.resolve();
+      }
+      try {
+        const ret = fn(context, dispatch.bind(null, i + 1));
         return Promise.resolve(ret);
       } catch (error) {
         return Promise.reject(error);
