@@ -25,5 +25,8 @@
   },
   "git-pre-hooks": {
     "pre-commit": "npm run lint"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
