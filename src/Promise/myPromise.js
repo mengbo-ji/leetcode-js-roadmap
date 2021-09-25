@@ -10,11 +10,11 @@ class MyPromise {
       this.reject(error);
     }
   }
-  status = PENDIND
-  value = undefined
-  reason = undefined
-  successCallback = []
-  failCallback = []
+  status = PENDIND // 初始状态
+  value = undefined // 成功回调的值
+  reason = undefined // 失败回调的原因
+  successCallback = [] // 成功回调的数组
+  failCallback = [] // 失败回调的数组
   resolve = value => {
     if (this.status !== PENDIND) return;
     this.status = FULFILLED;
@@ -95,15 +95,25 @@ class MyPromise {
     // 实现链式调用
     return promise2;
   }
+  finally(callback) {
+    return this.then(value => {
+      return MyPromise.resolve(callback()).then(() => value);
+    }, error => {
+      return MyPromise.resolve(callback()).then(() => { throw error; });
+    });
+  }
+  catch(failCallback) {
+    return this.then(undefined, failCallback);
+  }
   static all(array) {
     const result = [];
     let index = 0;
     return new MyPromise((resolve, reject) => {
-      function getData(i, data) {
-        result[i] = data;
+      function addData(i, value) {
+        result[i] = value;
         // 有异步代码 所以这里要等待
         index++;
-        if (index === result.length) {
+        if (index === array.length) {
           resolve(result);
         }
       }
@@ -111,13 +121,17 @@ class MyPromise {
         const current = array[i];
         if (current instanceof MyPromise) {
           // promise 实例
-          current.then(value => getData(i, value), reject);
+          current.then(value => addData(i, value), reject);
         } else {
           // 普通值
-          getData(i, current);
+          addData(i, array[i]);
         }
       }
     });
+  }
+  static resolve(value) {
+    if (value instanceof MyPromise) return value;
+    return new MyPromise(resolve => resolve(value));
   }
 }
 

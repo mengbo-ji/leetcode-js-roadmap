@@ -1,5 +1,7 @@
 
 const MyPromise = require('./myPromise');
+const { pathEq } = require('lodash/fp');
+const { values } = require('lodash');
 
 function other() {
   return new MyPromise((resolve, reject) => {
@@ -43,16 +45,36 @@ function other() {
 
 function p1() {
   return new MyPromise((resolve, reject) => {
-    resolve('p1');
+    setTimeout(() => {
+      resolve('p1');
+    }, 1000);
   });
 }
 
 function p2() {
   return new MyPromise((resolve, reject) => {
-    resolve('p2');
+    // resolve('p2 resolve');
+    reject('p2 reject');
   });
 }
 
-MyPromise.all([ 'a1', 'b1', p1(), p2(), 'c1', 'd1' ]).then(result => {
-  console.log('result', result);
-});
+// MyPromise.all([ 'a', 'b', p1(), p2(), 'c', 'd' ]).then(result => {
+//   console.log('result', result);
+// });
+
+// MyPromise.resolve(100).then(value => console.log(value));
+// MyPromise.resolve(p1()).then(value => console.log(value));
+
+// p2()
+//   .finally(() => {
+//     console.log('finally');
+//     return p1();
+//   })
+//   .then(value => { console.log(value); },
+//     error => console.log(error))
+//   .then(value => console.log('value1', value),
+//     error => console.log('error1', error));
+
+p2()
+  .then(value => console.log(value))
+  .catch(error => console.log(error));
