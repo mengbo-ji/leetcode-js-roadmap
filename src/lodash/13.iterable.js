@@ -64,6 +64,33 @@ const todos = {
 //   console.log(item);
 // });
 
-for (const item of todos) {
-  console.log(item);
+// for (const item of todos) {
+//   console.log(item);
+// }
+
+
+// 2. 采用Generator接口实现iterable接口
+
+
+const todos1 = {
+  life: [ '吃饭', '睡觉', '❤️' ],
+  learn: [ '学习', '敲代码', '提升' ],
+  work: [ '工作', '开会' ],
+  each(callback) {
+    const all = [ ...this.life, ...this.learn, ...this.work ];
+    for (const item of all) {
+      callback(item);
+    }
+  },
+  *[Symbol.iterator]() {
+    const all = [ ...this.life, ...this.learn, ...this.work ];
+    for (const item of all) {
+      yield item;
+    }
+  },
+};
+
+
+for (const item of todos1) {
+  console.log(item, 'item');
 }
