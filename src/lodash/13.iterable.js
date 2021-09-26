@@ -94,3 +94,14 @@ const todos1 = {
 for (const item of todos1) {
   console.log(item, 'item');
 }
+
+const obj1 = {
+  html: 4,
+  css: 3,
+  javascript: 100,
+};
+
+for (const [ key, value ] of Object.entries(obj1)) {
+  // console.log(key, value);
+  console.log(`${key.padEnd(16, '-')}|${value.toString().padStart(3, '0')}`);
+}
