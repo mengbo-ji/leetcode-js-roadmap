@@ -19,7 +19,25 @@ function curry(fn) {
 
 const curried = curry(getSum);
 
-console.log(curried(1, 2, 3));
-console.log(curried(1)(2)(3));
-console.log(curried(1)(2, 3));
+// console.log(curried(1, 2, 3));
+// console.log(curried(1)(2)(3));
+// console.log(curried(1)(2, 3));
 
+
+function curry1(fn) {
+  return function temp(...args) {
+    if (args.length < fn.length) {
+      return function() {
+        return temp(...args, ...arguments);
+      };
+    }
+    return fn(...args);
+  };
+}
+
+const curried1 = curry1(getSum);
+
+
+console.log(curried1(1, 2, 3));
+console.log(curried1(1)(2)(3));
+console.log(curried1(1)(2, 3));
