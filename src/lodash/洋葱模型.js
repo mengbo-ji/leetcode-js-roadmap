@@ -3,25 +3,25 @@ const middleware = [];
 
 middleware.push(async (ctx, next) => {
   console.log('第一个中间件前');
-  next();
+  await next();
   console.log('第一个中间件后');
 });
 
 middleware.push(async (ctx, next) => {
   console.log('第二个中间件前');
-  next();
+  await next();
   console.log('第二个中间件后');
 });
 
 middleware.push(async (ctx, next) => {
   console.log('第三个中间件前');
-  next();
+  await next();
   console.log('第三个中间件后');
 });
 
 middleware.push(async (ctx, next) => {
   console.log('第四个中间件前');
-  next();
+  await next();
   console.log('第四个中间件后');
 });
 

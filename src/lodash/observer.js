@@ -21,3 +21,27 @@ class Observer {
     }
   }
 }
+
+class Event {
+  constructor() {
+    this._events = Object.create(null);
+  }
+
+  on(eventName, cb) {
+    this._events = this._events[eventName] || [];
+    this._events.push(cb);
+  }
+
+  emit(eventName, ...args) {
+    if (this._events[eventName]) {
+      this._events[eventName].forEach(fn => fn(args));
+    }
+  }
+
+  off(eventName, cb) {
+    if (this._events[eventName]) {
+      const newEvents = cb ? this._events[eventName].filter(fn => fn !== cb) : [];
+      this._events[eventName] = newEvents;
+    }
+  }
+}
