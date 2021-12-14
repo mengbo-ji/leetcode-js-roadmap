@@ -22,14 +22,21 @@ class Observer {
   }
 }
 
-class Event {
-  constructor() {
-    this._events = Object.create(null);
-  }
+class MyEvent {
+  _events = {};
 
   on(eventName, cb) {
-    this._events = this._events[eventName] || [];
-    this._events.push(cb);
+    this._events[eventName] = this._events[eventName] || [];
+    this._events[eventName].push(cb);
+  }
+
+  once(eventName, cb) {
+    const tempFn = (...args) => {
+      cb(...args);
+      this.off(eventName, tempFn);
+    };
+    tempFn.link = cb;
+    this.on(eventName, tempFn);
   }
 
   emit(eventName, ...args) {
@@ -40,8 +47,16 @@ class Event {
 
   off(eventName, cb) {
     if (this._events[eventName]) {
-      const newEvents = cb ? this._events[eventName].filter(fn => fn !== cb) : [];
+      const newEvents = cb ? this._events[eventName].filter(fn => fn !== cb && fn.link !== cb) : [];
       this._events[eventName] = newEvents;
     }
   }
 }
+
+const event = new MyEvent();
+const fn = payload => {
+  console.log('事件1执行了', payload);
+};
+event.once('事件1', fn);
+event.emit('事件1', 1);
+event.emit('事件1', 2);
