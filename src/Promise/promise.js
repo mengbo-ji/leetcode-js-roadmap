@@ -1,27 +1,40 @@
-// 模拟实现 Promise
-function Bromise(callback) {
-  let _onResolve = null;
-  // let _onReject = null;
 
-  this.then = function(onResolve, onReject) {
-    _onResolve = onResolve;
-  };
-
-  function resolve(value) {
-    setTimeout(() => { _onResolve(value); }, 0);
+class MyPromise {
+  constructor(exector) {
+    try {
+      exector(this.resolve, this.resolve);
+    } catch (error) {
+      this.reject(error);
+    }
   }
-
-  callback(resolve, null);
+  status = 'pending'
+  value = undefined;
+  reason = undefined;
+  resolve = value => {
+    if (this.status === 'pending') {
+      this.status = 'fulfilled';
+      this.value = value;
+    }
+  }
+  reject = reason => {
+    if (this.status === 'pending') {
+      this.status = 'rejected';
+      this.reason = reason;
+    }
+  }
+  then = (successCallback, failCallback) => {
+    if (this.status === 'fulfilled') {
+      successCallback(this.value);
+    } else if (this.status === 'rejected') {
+      failCallback(this.reason);
+    }
+  }
 }
 
+const x = new MyPromise((resolve, reject) => {
+  resolve(1);
+});
 
-function callback(resolve, reject) {
-  resolve(100);
-}
-// 将Promise改成我们自己的Bromsie
-const demo = new Bromise(callback);
-
-function onResolve(value) {
+x.then(value => {
   console.log(value);
-}
-demo.then(onResolve);
+});
