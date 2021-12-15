@@ -8,3 +8,14 @@ function throttle(fn, delay) {
     }
   };
 }
+
+function throttle1(fn, delay) {
+  let prevTime = 0;
+  return (...args) => {
+    const nowTime = +new Date();
+    if (nowTime - prevTime > delay) {
+      fn(...args);
+      prevTime = nowTime;
+    }
+  };
+}

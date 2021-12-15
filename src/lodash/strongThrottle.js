@@ -17,3 +17,18 @@ function throttle(fn, delay) {
     }
   };
 }
+
+function strongThrottle(fn, delay) {
+  let timer = null;
+  let prevTime = 0;
+  return (...args) => {
+    const nowTime = +new Date();
+    if (nowTime - prevTime < delay) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), delay);
+    } else {
+      fn(...args);
+      prevTime = nowTime;
+    }
+  };
+}
