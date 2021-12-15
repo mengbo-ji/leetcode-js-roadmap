@@ -102,3 +102,23 @@ function compose2(middleware) {
     }
   };
 }
+
+function compose3(middleware) {
+  return function(context) {
+    dispatch(0);
+    function dispatch(i) {
+      const fn = middleware[i];
+      if (i === middleware.length) {
+        return Promise.resolve();
+      }
+      try {
+        const ret = fn(context, dispatch.bind(null, i + 1));
+        return Promise.resolve(ret);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+  };
+}
+
+compose2(middleware)(ctx);
