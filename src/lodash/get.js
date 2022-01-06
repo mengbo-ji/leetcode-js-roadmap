@@ -62,6 +62,18 @@ function get1(source, path, defaultValue) {
 }
 
 
+function get2(source, path, defaultValue) {
+  const paths = path.replace(/\[(\d+)\]/g, '.$1').split('.').filter(Boolean);
+  let res = source;
+  for (const p of paths) {
+    res = Object(res)[p];
+    if (res === undefined) {
+      return defaultValue;
+    }
+  }
+  return res;
+}
+
 console.log(get1({ a: null }, 'a.b.c', 3)); // output: 3
 console.log(get1({ a: undefined }, 'a', 3)); // output: 3
 console.log(get1({ a: null }, 'a', 3)); // output: null

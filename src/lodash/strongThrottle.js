@@ -25,7 +25,10 @@ function strongThrottle(fn, delay) {
     const nowTime = +new Date();
     if (nowTime - prevTime < delay) {
       if (timer) clearTimeout(timer);
-      timer = setTimeout(() => fn(...args), delay);
+      timer = setTimeout(() => {
+        prevTime = nowTime;
+        fn(...args);
+      }, delay);
     } else {
       fn(...args);
       prevTime = nowTime;

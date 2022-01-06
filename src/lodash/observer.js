@@ -41,7 +41,7 @@ class MyEvent {
 
   emit(eventName, ...args) {
     if (this._events[eventName]) {
-      this._events[eventName].forEach(fn => fn(args));
+      this._events[eventName].forEach(fn => fn(...args));
     }
   }
 

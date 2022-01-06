@@ -37,6 +37,16 @@ function curry1(fn) {
 
 const curried1 = curry1(getSum);
 
+function curry2(fn) {
+  return function temp(...args) {
+    if (args.length < fn.length) {
+      return function() {
+        return temp(...args, ...arguments);
+      };
+    }
+    return fn(...args);
+  };
+}
 
 console.log(curried1(1, 2, 3));
 console.log(curried1(1)(2)(3));

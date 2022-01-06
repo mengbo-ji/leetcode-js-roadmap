@@ -14,3 +14,11 @@ Function.prototype._apply = function(base, args) {
 };
 
 fn._apply(obj, [ 1, 2 ]);
+
+Function.prototype._apply1 = function(base, args) {
+  base = base || window;
+  base.fn = this;
+  const ret = base.fn(...args);
+  Reflect.deleteProperty(base, 'fn')
+  return ret
+}

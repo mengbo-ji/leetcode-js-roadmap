@@ -14,3 +14,14 @@ Function.prototype._call = function(base, ...args) {
 }
 
 fn._call(obj, 1, 2)
+
+
+Function.prototype._call1 = function(base, ...args) {
+  base = base || global;
+  base.fn = this;
+  const ret = base.fn(...args);
+  delete base.fn;
+  return ret;
+}
+
+fn._call1(obj, 1, 2)

@@ -15,3 +15,13 @@ Function.prototype._bind = function(base, ...args1) {
   }
 }
 fn._bind(obj, 1, 2)(3, 4)
+
+Function.prototype._bind1 = function(base, ...args) {
+  return () => {
+    base = base || window;
+    base.fn = this;
+    const ret = base.fn(...args, ...arguments);
+    Reflect.deleteProperty(base, 'fn')
+    return ret
+  }
+}
