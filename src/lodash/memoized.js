@@ -26,3 +26,10 @@ request_2('/path', () => {
   console.log('test');
 });
 
+
+const request3 = () => {
+  const cache = {};
+  return (url, cb) => {
+    cb(cache[url] ? cache[url] : (cache[url] = request1(url)));
+  };
+};

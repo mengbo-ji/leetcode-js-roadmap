@@ -51,3 +51,25 @@ function curry2(fn) {
 console.log(curried1(1, 2, 3));
 console.log(curried1(1)(2)(3));
 console.log(curried1(1)(2, 3));
+
+function curry3(fn) {
+  return function temp(...args) {
+    if (args.length < fn.length) {
+      return function() {
+        return temp(...args, arguments);
+      };
+    }
+    return fn(...args);
+  };
+}
+
+function curry4(fn) {
+  return function temp(...args) {
+    if (args.length < fn.length) {
+      return function() {
+        return temp(...args, arguments);
+      };
+    }
+    return fn(...args);
+  };
+}

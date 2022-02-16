@@ -19,3 +19,9 @@ const f = compose(toUpper, first, reverse);
 
 const res = f([ 'one', 'two', 'three' ]);
 console.log('res', res);
+
+const compose1 = args => {
+  return value => {
+    return args.reduceRight((prev, next) => next(prev), value);
+  };
+};

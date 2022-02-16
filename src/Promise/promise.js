@@ -70,3 +70,44 @@ class MyPromise1 {
     }
   }
 }
+
+class Promise1 {
+  constructor(exector) {
+    try {
+      exector(this.resolve, this.reject);
+    } catch (error) {
+      this.reject(error);
+    }
+  }
+  status = 'pending' // pending success rejected
+  reason = null
+  value = null
+
+  resolve(value) {
+    if (this.status === 'pending') {
+      this.status = 'success';
+      this.value = value;
+    }
+  }
+
+  reject(reason) {
+    if (this.status === 'pending') {
+      this.status = 'rejected';
+      this.reason = reason;
+    }
+  }
+
+  then(successCb, rejectedCb) {
+    if (this.status === 'success') {
+      successCb(this.value);
+    } else if (this.status === 'rejected') {
+      rejectedCb(this.reason);
+    }
+  }
+
+}
+
+new MyPromise((resolve, reject) => {
+  resolve();
+  reject();
+});

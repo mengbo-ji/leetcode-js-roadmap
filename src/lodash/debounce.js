@@ -18,3 +18,14 @@ function debounce1(fn, delay) {
     timer = setTimeout(() => fn(...args), delay);
   };
 }
+
+
+function debounce2(fn, delay) {
+  let timer = null;
+  return (...args) => {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}

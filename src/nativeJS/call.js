@@ -25,3 +25,12 @@ Function.prototype._call1 = function(base, ...args) {
 }
 
 fn._call1(obj, 1, 2)
+
+
+Function.prototype.call1 = function(ctx, ...args) {
+  ctx = ctx || window;
+  ctx.fn = this;
+  const ret = ctx.fn(...args);
+  delete ctx.fn;
+  return ret
+}

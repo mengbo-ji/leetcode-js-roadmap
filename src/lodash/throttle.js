@@ -19,3 +19,13 @@ function throttle1(fn, delay) {
     }
   };
 }
+
+function throttle2(fn, delay) {
+  let lastTime = 0;
+  return (...args) => {
+    const nowTime = +new Date();
+    if (nowTime - lastTime < delay) return;
+    fn(...args);
+    lastTime = nowTime;
+  };
+}

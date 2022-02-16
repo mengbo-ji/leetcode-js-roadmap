@@ -28,3 +28,36 @@ const _chunk = (array, size = 1) => {
 };
 
 console.log('_chunk', _chunk(arr));
+
+const _chunk1 = (array, size) => {
+  size = Math.max(size, 0);
+  const length = array == null ? 0 : array.length;
+  if (!length || size < 1) {
+    return [];
+  }
+
+  let index = 0;
+  let resultIndex = 0;
+  const result = [];
+  while (index < length) {
+    result[resultIndex++] = array.slice(index, index += size);
+  }
+  return result;
+};
+
+const _chunk2 = (array, size) => {
+  size = Math.max(size, 0);
+  const length = array == null ? 0 : array.length;
+  if (!length || size < 1) {
+    return [];
+  }
+
+  let index = 0;
+  let resultIndex = 0;
+  const result = [];
+  while (index < length) {
+    result[resultIndex++] = array.slice(index, index += size);
+  }
+  return result;
+};
+

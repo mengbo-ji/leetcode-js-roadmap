@@ -22,3 +22,12 @@ Function.prototype._apply1 = function(base, args) {
   Reflect.deleteProperty(base, 'fn')
   return ret
 }
+
+
+Function.prototype.apply1 = function(ctx, args) {
+  ctx = ctx || window
+  ctx.fn = this
+  const ret = ctx.fn(...args)
+  delete ctx.fn
+  return ret
+}

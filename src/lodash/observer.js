@@ -60,3 +60,24 @@ const fn = payload => {
 event.once('事件1', fn);
 event.emit('事件1', 1);
 event.emit('事件1', 2);
+
+class Observer2 {
+  _events = {}
+
+  on(eventName, cb) {
+    this._events[eventName] = this._events[eventName] || [];
+    this._events[eventName].push(cb);
+  }
+  emit(eventName, payload) {
+    if (this._events[eventName]) {
+      this._events[eventName].forEach(cb => cb(payload));
+    }
+  }
+  off(eventName, cb) {
+    if (this._events[eventName]) {
+      const newEvents = cb ? this._events[eventName].filter(v => cb !== v) : [];
+      this._events[eventName] = newEvents;
+    }
+  }
+}
+

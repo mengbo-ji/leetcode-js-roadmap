@@ -1,3 +1,5 @@
+const { now } = require('lodash');
+
 function throttle(fn, delay) {
   let timer = null;
   let lastTime = 0;
@@ -32,6 +34,24 @@ function strongThrottle(fn, delay) {
     } else {
       fn(...args);
       prevTime = nowTime;
+    }
+  };
+}
+
+function strongThrottle2(fn, delay) {
+  let timer = null;
+  let lastTime = 0;
+  return (...args) => {
+    const nowTime = +new Date();
+    if (nowTime - lastTime < delay) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn(...args);
+        lastTime = nowTime;
+      }, delay);
+    } else {
+      fn(...args);
+      lastTime = nowTime;
     }
   };
 }

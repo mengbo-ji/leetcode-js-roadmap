@@ -25,3 +25,13 @@ Function.prototype._bind1 = function(base, ...args) {
     return ret
   }
 }
+
+Function.prototype.bind1 = function(ctx, ...args) {
+  return () => {
+    ctx = ctx || window;
+    ctx.fn = this;
+    const ret = ctx.fn(...args, arguments)
+    delete ctx.fn
+    return ret
+  }
+}

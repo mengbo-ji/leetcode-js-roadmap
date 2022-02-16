@@ -121,4 +121,23 @@ function compose3(middleware) {
   };
 }
 
-compose2(middleware)(ctx);
+compose3(middleware)(ctx);
+
+function compose4(middleware) {
+  return function temp(ctx) {
+    dispatch(0);
+    function dispatch(i) {
+      const fn = middleware[i];
+      if (i === middleware.length) {
+        return Promise.resolve();
+      }
+      try {
+        const ret = fn(ctx, dispatch.bind(null, i + 1));
+        return Promise.resolve(ret);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+  };
+}
+
